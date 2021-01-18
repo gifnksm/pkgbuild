@@ -1,0 +1,38 @@
+# Maintainer: NAKASHIMA, Makoto <makoto.nksm@gmail.com>
+
+pkgname=genie-systemd
+_pkgname=genie
+pkgver=1.31
+pkgrel=1
+pkgdesc="A quick way into a systemd \"bottle\" for WSL"
+arch=('x86_64')
+url="https://github.com/arkane-systems/genie"
+depends=('daemonize' 'dotnet-runtime>=5.0' 'dotnet-host>=5.0' 'inetutils')
+makedepends=('dotnet-sdk>=5.0')
+conflicts=('genie-systemd')
+provides=('genie-systemd')
+source=("${pkgname}-${pkgver}.tar.gz::${url}/archive/${pkgver}.tar.gz")
+sha256sums=('db3a177b243aa2d5fe0bd082a864d6b6deaa7ec1a3e2d612853dea1aba538e39')
+options=(!strip)
+backup=(etc/genie.ini)
+
+prepare() {
+  cd "${_pkgname}-${pkgver}"
+  sed -i 's!\<libexec/genie/!lib/genie/!' genie/genie/Program.cs
+}
+
+build() {
+  export DOTNET_CLI_TELEMETRY_OPTOUT=1
+  export DOTNET_SKIP_FIRST_TIME_EXPERIENCE=true
+  cd "${_pkgname}-${pkgver}"
+  make -C genie build
+}
+
+package() {
+  cd "${_pkgname}-${pkgver}"
+  install -Dm 4755 -o root "genie/genie/bin/Release/net5.0/linux-x64/publish/genie" -t "${pkgdir}/usr/bin/"
+  install -Dm 0755 -o root "genie/scripts/runinwsl.sh" -t "${pkgdir}/usr/lib/genie/"
+  install -Dm 0755 -o root "genie/scripts/10-genie-envar.sh" -t "${pkgdir}/usr/lib/systemd/system-environment-generators/"
+  install -Dm 0644 -o root "genie/conf/genie.ini" -t "${pkgdir}/etc/"
+  install -Dm 0644 -o root "genie/docs/genie.8" -t "${pkgdir}/usr/share/man/man8/"
+}
