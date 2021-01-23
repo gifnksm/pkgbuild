@@ -2,7 +2,7 @@
 
 pkgname=genie-systemd
 _pkgname=genie
-pkgver=1.31
+pkgver=1.32
 pkgrel=1
 pkgdesc="A quick way into a systemd \"bottle\" for WSL"
 arch=('x86_64')
@@ -13,8 +13,8 @@ conflicts=('genie-systemd')
 provides=('genie-systemd')
 source=("${pkgname}-${pkgver}.tar.gz::${url}/archive/${pkgver}.tar.gz"
         "no-libexec.patch")
-sha256sums=('db3a177b243aa2d5fe0bd082a864d6b6deaa7ec1a3e2d612853dea1aba538e39'
-            '56a4ce40e8829d719f25db327082dd885d1a03fb5f331e10c9f57474a06fe9af')
+sha256sums=('d01a4045158a2d24f0990033e11361dd30168978902db40af30dea91a690f28a'
+            '8e8b0ad9d8fc4aaebf3b457722f79ea09f51eb719d2f4a931bf7e1659af52430')
 options=(!strip)
 backup=(etc/genie.ini)
 
@@ -33,7 +33,7 @@ build() {
 package() {
   cd "${_pkgname}-${pkgver}"
   install -Dm 4755 -o root "genie/genie/bin/Release/net5.0/linux-x64/publish/genie" -t "${pkgdir}/usr/bin/"
-  install -Dm 0755 -o root "genie/scripts/runinwsl.sh" -t "${pkgdir}/usr/lib/genie/"
+  install -Dm 0755 -o root "genie/runinwsl/bin/Release/net5.0/linux-x64/publish/runinwsl" -t "${pkgdir}/usr/lib/genie/"
   install -Dm 0755 -o root "genie/scripts/10-genie-envar.sh" -t "${pkgdir}/usr/lib/genie/"
   install -d 0755 -o root "${pkgdir}/usr/lib/systemd/"{user,system}"-environment-generators/"
   ln -s "/usr/lib/genie/10-genie-envar.sh" "${pkgdir}/usr/lib/systemd/user-environment-generators/"
