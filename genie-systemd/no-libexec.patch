@@ -1,0 +1,12 @@
+diff -u -r --text a/arch/genie/Program.cs b/arch/genie/Program.cs
+--- a/arch/genie/Program.cs
++++ b/arch/genie/Program.cs
+@@ -441,7 +441,7 @@
+ 
+             Chain ("machinectl",
+                    String.Concat ($"shell -q {realUserName}@.host ",
+-                                  GetPrefixedPath ("libexec/genie/runinwsl.sh"),
++                                  GetPrefixedPath ("lib/genie/runinwsl.sh"),
+                                   $" \"{Environment.CurrentDirectory}\" {commandLine.Trim()}"),
+                    "running command failed; machinectl shell");
+         }

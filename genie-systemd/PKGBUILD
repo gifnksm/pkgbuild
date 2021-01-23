@@ -11,14 +11,16 @@ depends=('daemonize' 'dotnet-runtime>=5.0' 'dotnet-host>=5.0' 'inetutils')
 makedepends=('dotnet-sdk>=5.0')
 conflicts=('genie-systemd')
 provides=('genie-systemd')
-source=("${pkgname}-${pkgver}.tar.gz::${url}/archive/${pkgver}.tar.gz")
-sha256sums=('db3a177b243aa2d5fe0bd082a864d6b6deaa7ec1a3e2d612853dea1aba538e39')
+source=("${pkgname}-${pkgver}.tar.gz::${url}/archive/${pkgver}.tar.gz"
+        "no-libexec.patch")
+sha256sums=('db3a177b243aa2d5fe0bd082a864d6b6deaa7ec1a3e2d612853dea1aba538e39'
+            '56a4ce40e8829d719f25db327082dd885d1a03fb5f331e10c9f57474a06fe9af')
 options=(!strip)
 backup=(etc/genie.ini)
 
 prepare() {
   cd "${_pkgname}-${pkgver}"
-  sed -i 's!\<libexec/genie/!lib/genie/!' genie/genie/Program.cs
+  patch --forward --strip=1 --input="${srcdir}/no-libexec.patch"
 }
 
 build() {
