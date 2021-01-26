@@ -1,6 +1,6 @@
-diff -u -r --text a/arch/genie/Program.cs b/arch/genie/Program.cs
---- a/arch/genie/Program.cs
-+++ b/arch/genie/Program.cs
+diff -u -r --text a/genie/genie/Program.cs b/genie/genie/Program.cs
+--- a/genie/genie/Program.cs
++++ b/genie/genie/Program.cs
 @@ -377,7 +377,7 @@
              if (verbose)
                  Console.WriteLine ($"genie: running command '{string.Join(' ', commandLine)}'");

@@ -14,7 +14,7 @@ provides=('genie-systemd')
 source=("${pkgname}-${pkgver}.tar.gz::${url}/archive/${pkgver}.tar.gz"
         "no-libexec.patch")
 sha256sums=('d01a4045158a2d24f0990033e11361dd30168978902db40af30dea91a690f28a'
-            '8e8b0ad9d8fc4aaebf3b457722f79ea09f51eb719d2f4a931bf7e1659af52430')
+            '3564354d2ea7bbcc47e36c7161d43890438e39c469104da053d2119524414cb0')
 options=(!strip)
 backup=(etc/genie.ini)
 
