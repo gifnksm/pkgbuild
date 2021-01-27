@@ -2,18 +2,19 @@
 
 pkgname=genie-systemd
 _pkgname=genie
-pkgver=1.33
+pkgver=1.34
 pkgrel=1
 pkgdesc="A quick way into a systemd \"bottle\" for WSL"
 arch=('x86_64')
 url="https://github.com/arkane-systems/genie"
-depends=('daemonize' 'dotnet-runtime>=5.0' 'dotnet-host>=5.0' 'inetutils')
+license=('Unlicense')
+depends=('daemonize' 'dotnet-runtime>=5.0' 'dotnet-host>=5.0' 'inetutils' 'gawk')
 makedepends=('dotnet-sdk>=5.0')
 conflicts=('genie-systemd')
 provides=('genie-systemd')
 source=("${pkgname}-${pkgver}.tar.gz::${url}/archive/${pkgver}.tar.gz"
         "no-libexec.patch")
-sha256sums=('bad2f2ad34957d21af6924d9223048021b119747bd0244e9fb4c9f68d0273323'
+sha256sums=('165a41a390f94f45249c8a4fcdae74cdaa8c7753462ab1b63121cf3f53cb91a0'
             '3564354d2ea7bbcc47e36c7161d43890438e39c469104da053d2119524414cb0')
 options=(!strip)
 backup=(etc/genie.ini)
