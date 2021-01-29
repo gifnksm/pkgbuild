@@ -36,7 +36,7 @@ package() {
   install -Dm 4755 -o root "genie/genie/bin/Release/net5.0/linux-x64/publish/genie" -t "${pkgdir}/usr/bin/"
   install -Dm 0755 -o root "genie/runinwsl/bin/Release/net5.0/linux-x64/publish/runinwsl" -t "${pkgdir}/usr/lib/genie/"
   install -Dm 0755 -o root "genie/scripts/10-genie-envar.sh" -t "${pkgdir}/usr/lib/genie/"
-  install -d 0755 -o root "${pkgdir}/usr/lib/systemd/"{user,system}"-environment-generators/"
+  install -dm 0755 -o root "${pkgdir}/usr/lib/systemd/"{user,system}"-environment-generators/"
   ln -s "/usr/lib/genie/10-genie-envar.sh" "${pkgdir}/usr/lib/systemd/user-environment-generators/"
   ln -s "/usr/lib/genie/10-genie-envar.sh" "${pkgdir}/usr/lib/systemd/system-environment-generators/"
   install -Dm 0644 -o root "genie/conf/genie.ini" -t "${pkgdir}/etc/"
