@@ -2,7 +2,7 @@
 
 pkgname=genie-systemd
 _pkgname=genie
-pkgver=1.34
+pkgver=1.35
 pkgrel=1
 pkgdesc="A quick way into a systemd \"bottle\" for WSL"
 arch=('x86_64')
@@ -12,10 +12,10 @@ depends=('daemonize' 'dotnet-runtime>=5.0' 'dotnet-host>=5.0' 'inetutils' 'gawk'
 makedepends=('dotnet-sdk>=5.0')
 conflicts=('genie-systemd')
 provides=('genie-systemd')
-source=("${pkgname}-${pkgver}.tar.gz::${url}/archive/${pkgver}.tar.gz"
+source=("${pkgname}-${pkgver}.tar.gz::${url}/archive/v${pkgver}.tar.gz"
         "no-libexec.patch")
-sha256sums=('165a41a390f94f45249c8a4fcdae74cdaa8c7753462ab1b63121cf3f53cb91a0'
-            '3564354d2ea7bbcc47e36c7161d43890438e39c469104da053d2119524414cb0')
+sha256sums=('74bad680336bfcc995fa558bf41986c8d959c5cd8eb3aa77f3fe885c0e9176e2'
+            '574d66cf866d7d52527ce346a5a15e531965ae2ed5296b6e588c764617546e29')
 options=(!strip)
 backup=(etc/genie.ini)
 
@@ -28,17 +28,17 @@ build() {
   export DOTNET_CLI_TELEMETRY_OPTOUT=1
   export DOTNET_SKIP_FIRST_TIME_EXPERIENCE=true
   cd "${_pkgname}-${pkgver}"
-  make -C genie build
+  make -C ./binsrc
 }
 
 package() {
   cd "${_pkgname}-${pkgver}"
-  install -Dm 4755 -o root "genie/genie/bin/Release/net5.0/linux-x64/publish/genie" -t "${pkgdir}/usr/bin/"
-  install -Dm 0755 -o root "genie/runinwsl/bin/Release/net5.0/linux-x64/publish/runinwsl" -t "${pkgdir}/usr/lib/genie/"
-  install -Dm 0755 -o root "genie/scripts/10-genie-envar.sh" -t "${pkgdir}/usr/lib/genie/"
+  install -Dm 4755 -o root "binsrc/genie/bin/Release/net5.0/linux-x64/publish/genie" -t "${pkgdir}/usr/bin/"
+  install -Dm 0755 -o root "binsrc/runinwsl/bin/Release/net5.0/linux-x64/publish/runinwsl" -t "${pkgdir}/usr/lib/genie/"
+  install -Dm 0755 -o root "othersrc/scripts/10-genie-envar.sh" -t "${pkgdir}/usr/lib/genie/"
   install -dm 0755 -o root "${pkgdir}/usr/lib/systemd/"{user,system}"-environment-generators/"
   ln -s "/usr/lib/genie/10-genie-envar.sh" "${pkgdir}/usr/lib/systemd/user-environment-generators/"
   ln -s "/usr/lib/genie/10-genie-envar.sh" "${pkgdir}/usr/lib/systemd/system-environment-generators/"
-  install -Dm 0644 -o root "genie/conf/genie.ini" -t "${pkgdir}/etc/"
-  install -Dm 0644 -o root "genie/docs/genie.8" -t "${pkgdir}/usr/share/man/man8/"
+  install -Dm 0644 -o root "othersrc/etc/genie.ini" -t "${pkgdir}/etc/"
+  install -Dm 0644 -o root "othersrc/docs/genie.8" -t "${pkgdir}/usr/share/man/man8/"
 }
