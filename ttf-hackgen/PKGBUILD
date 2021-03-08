@@ -1,7 +1,7 @@
 # Maintainer: NAKASHIMA, Makoto <makoto.nksm@gmail.com>
 
 pkgname=ttf-hackgen
-pkgver=2.2.3
+pkgver=2.3.0
 pkgrel=1
 pkgdesc="a composite font of Hack and GenJyuu-Gothic."
 arch=("any")
@@ -10,8 +10,8 @@ license=("custom")
 source=("https://github.com/yuru7/HackGen/releases/download/v${pkgver}/HackGen_v${pkgver}.zip"
         "https://github.com/yuru7/HackGen/releases/download/v${pkgver}/HackGenNerd_v${pkgver}.zip"
         "https://raw.githubusercontent.com/yuru7/HackGen/v${pkgver}/LICENSE.txt")
-sha256sums=('81dc942372856d7d7d0e3f8a1ecef11471e23161dce25165f0cddc01bcef62f1'
-            '7ce5ea01ab88443f30de461e8b614cbeaed10a7fc9580902922646a1134158f0'
+sha256sums=('5559fff096824f7eb62803236079463737356b0ee1aaeaf20c46cd491aa30178'
+            '10fac25cb174a4d94ecf7fbe40a197a4f76cfb4ff8a7be5015aac64dbf62a7dc'
             '8ac2fc3472cd8c8c988bbd047a9739f528f614a3e61ff0925e26d2e76e53301d')
 
 package() {
