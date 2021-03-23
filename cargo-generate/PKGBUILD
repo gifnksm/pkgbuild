@@ -1,0 +1,24 @@
+# Maintainer: NAKASHIMA, Makoto <makoto.nksm@gmail.com>
+
+pkgname=cargo-generate
+pkgver=0.6.0
+pkgrel=1
+pkgdesc='Use pre-existing git repositories as templates'
+arch=('i686' 'x86_64')
+url="https://github.com/$pkgname/$pkgname"
+license=('APACHE' 'MIT')
+depends=('cargo')
+source=("$pkgname-$pkgver.tar.gz::https://github.com/$pkgname/$pkgname/archive/v$pkgver.tar.gz")
+sha256sums=('be2845957ef15057d2225d364f9613a21051d6ac99b8e7dea36aeb53fc06dc29')
+
+build() {
+	cd "$pkgname-$pkgver"
+	cargo build --release
+}
+
+package() {
+	cd "$pkgname-$pkgver"
+	install -Dm755 "target/release/$pkgname" "$pkgdir/usr/bin/$pkgname"
+	install -Dm644 LICENSE-APACHE "$pkgdir/usr/share/licenses/$pkgname/LICENSE-APACHE"
+	install -Dm644 LICENSE-MIT "$pkgdir/usr/share/licenses/$pkgname/LICENSE-MIT"
+}
