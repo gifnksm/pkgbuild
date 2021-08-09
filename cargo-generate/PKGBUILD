@@ -1,7 +1,7 @@
 # Maintainer: NAKASHIMA, Makoto <makoto.nksm@gmail.com>
 
 pkgname=cargo-generate
-pkgver=0.7.1
+pkgver=0.8.0
 pkgrel=1
 pkgdesc='Use pre-existing git repositories as templates'
 arch=('i686' 'x86_64')
@@ -9,7 +9,7 @@ url="https://github.com/$pkgname/$pkgname"
 license=('APACHE' 'MIT')
 depends=('cargo')
 source=("$pkgname-$pkgver.tar.gz::https://github.com/$pkgname/$pkgname/archive/v$pkgver.tar.gz")
-sha256sums=('aabd04d206c04cec84cdf3555eb569758491896783952faa998794a959d50c20')
+sha256sums=('ac45d4c80ca74623e1fc3e581c33bd0408611d13c51368e2937f3074cd83f6cf')
 
 build() {
 	cd "$pkgname-$pkgver"
