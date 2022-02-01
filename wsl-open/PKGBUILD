@@ -1,0 +1,26 @@
+# Maintainer: NAKASHIMA, Makoto <makoto.nksm@gmail.com>
+
+pkgname=wsl-open
+pkgver=2.2.1
+pkgrel=1
+pkgdesc="Open files with xdg-open on Bash for Windows in Windows applications."
+arch=('any')
+url="https://gitlab.com/4U6U57/wsl-open/"
+license=('MIT')
+depends=()
+makedepends=()
+optdepends=(xdg-utils)
+conflicts=()
+provides=()
+source=("${url}-/archive/v${pkgver}/${pkgname}-v${pkgver}.tar.gz")
+sha256sums=('98041e748e0e137435d7a49206f8b734b64983b8f936608e77fc537b88eb1fb8')
+options=()
+backup=()
+
+package() {
+  cd "${pkgname}-v${pkgver}"
+
+  install -Dm 0755 -o root wsl-open.sh "${pkgdir}/usr/bin/wsl-open"
+  install -Dm 0644 -o root wsl-open.1 -t "${pkgdir}/usr/share/man/man1/"
+  install -Dm 0644 -o root LICENSE -t "${pkgdir}/usr/share/licenses/${pkgname}"
+}
