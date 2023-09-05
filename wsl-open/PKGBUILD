@@ -1,7 +1,7 @@
 # Maintainer: NAKASHIMA, Makoto <makoto.nksm@gmail.com>
 
 pkgname=wsl-open
-pkgver=2.2.1
+pkgver=2.2.2
 pkgrel=1
 pkgdesc="Open files with xdg-open on Bash for Windows in Windows applications."
 arch=('any')
@@ -13,7 +13,7 @@ optdepends=(xdg-utils)
 conflicts=()
 provides=()
 source=("${url}-/archive/v${pkgver}/${pkgname}-v${pkgver}.tar.gz")
-sha256sums=('98041e748e0e137435d7a49206f8b734b64983b8f936608e77fc537b88eb1fb8')
+sha256sums=('376ffa970a660f276129f1b369ea4fd6e36d1ecb06a19b396aed300374a610f8')
 options=()
 backup=()
 
